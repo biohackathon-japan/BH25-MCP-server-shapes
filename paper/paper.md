@@ -32,6 +32,9 @@ authors:
   - name: Julia Koblitz
     orcid: 0000-0002-7260-2129
     affilation: 3
+  - name: Samuel Bustamante-Larriet
+    orcid: 0009-0005-8631-2682
+    affiliation: 1    
   - name: Daniel Fernández-Álvarez
     orcid: 0000-0002-8666-7660
     affiliation: 1
@@ -59,20 +62,33 @@ group: BH25-MCP-server-shapes
 git_url: https://github.com/biohackathon-japan/BH25-MCP-server-shapes
 # This is the short authors description that is used at the
 # bottom of the generated paper (typically the first two authors):
-authors_short: First Author \emph{et al.}
+authors_short: Jose Labra \emph{et al.}
 ---
 
 # Introduction
 
-As part of the DBCLS BioHackathon 2025, we present our  report for the project: MCP server tools with RDF shapes.
+This paper contains a report on the project MCP server tools with RDF shapes that was developed during the [DBCLS BioHackathon 2025](https://2025.biohackathon.org/).
+
+<!-- structure of introduction: 
+
+- Talk about MCP protocol and MCP servers
+- Talk about RDF data 
+- Talk about Shapes, ShEx and SHACL...and schemas for RDF data
+- Indicate what are the main goals...
+-->
+
 
 ## RDF Portal MCP server (TogoMCP)
+
 The RDF Portal MCP server ("TogoMCP" for short) connects an LLM (we exclusively used Claude Sonnet 4 in BH25) to the RDF Portal SPARQL endpoints. Given natural language queries, the LLM translates them into SPARQL queries. TogoMCP sends those SPARQL queries to the RDF Portal and the obtained query results are sent back to the LLM for further interactions.
 Before BH25, TogoMCP has already incorporated several databases provided at the RDF Portal, such as UniProt, PDB, ChEMBL, PubChem, to name a few. 
+
 ## The MIE file
+
 To make SPARQL generation more accurate and effective, TogoMCP utilizes a special file, called a MIE file, for each database. The MIE file for a database contains the metadata, a biologically relevant subset of ShEx and VoID schemas, as well as examples of RDF subgraphs and SPARQL queries, all concisely annotated in natural language (English). When a user provides a prompt that requires SPARQL queries, the LLM will (usually) calls an MCP tool named **describe_rdf_schema** with the database name as the argument, which presents the MIE file to the LLM. The MIE files are semi-automatically generated using the LLM and a hand-crafted template MIE file. An MCP prompt with a database name argument is also a part of TogoMCP. When BH25 started, there was no specification for the MIE file. The structure of the MIE template was ad hoc, and we didn't know which parts of the MIE file was critical. Thus, the objectives of working team included finding out the features essential for accurate and effective SPARQL generations and explicitly specifying them in the template file.
 
 # Day 1
+
 ## TogoMCP
 We added Glycosmos, along with its MIE file, to TogoMCP. Unlike other databases, the Glycosmos interface uses its original SPARQL endpoint (https://ts.glycosmos.org/sparql) rather than the one provided by the RDF Portal so it has access to the latest version of Glycosmos. The process of creating the Glycosmos MIE file is provided at https://claude.ai/share/6ed633b7-24c6-4843-98c9-eb4506c5c156. The resulting MIE file is uploaded to the GitHub: https://github.com/arkinjo/RDFPortal-MCP/blob/BH25/mie/glycosmos.yaml. We tested Glycosmos with a few biological questions:
 
@@ -169,130 +185,3 @@ For the latter question, the Microbial KG group found two media that were previo
 
 # Conclusions and future work
 
-# Sections to remove later....
-
-## Author information
-
-Information about the authors is given in the [YAML](https://en.wikipedia.org/wiki/YAML) format at the top of this template.
-For authors you provide their names, their affiliations, and ideally their [ORCID](https://orcid.org/)
-identifier. For affiliations, the [Research Organization Registry](https://ror.org/) (ROR) identifier can be given.
-For example, this is the author information for this template:
-
-```yaml
-authors:
-  - name: First Author
-    affiliation: 1
-  - name: Last Author
-    orcid: 0000-0000-0000-0000
-    affiliation: 2
-affiliations:
-  - name: First Affiliation
-    index: 1
-  - name: ELIXIR Europe
-    ror: 044rwnt51
-    index: 2
-```
-
-# Formatting
-
-This document use Markdown and you can look at [this tutorial](https://www.markdowntutorial.com/).
-
-## Subsection level 2
-
-Please keep sections to a maximum of only two levels.
-
-## Tables
-
-Tables can be added in the following way, though alternatives are possible:
-
-```markdown
-Table: Note that table caption is automatically numbered and should be
-given before the table itself.
-
-| Header 1 | Header 2 |
-| -------- | -------- |
-| item 1 | item 2 |
-| item 3 | item 4 |
-```
-
-This gives:
-
-Table: Note that table caption is automatically numbered and should be
-given before the table itself.
-
-| Header 1 | Header 2 |
-| -------- | -------- |
-| item 1 | item 2 |
-| item 3 | item 4 |
-
-## Figures
-
-A figure is added with:
-
-```markdown
-![Caption for BioHackrXiv logo figure](./biohackrxiv.png)
-```
-
-This gives:
-
-![Caption for BioHackrXiv logo figure](./biohackrxiv.png)
-
-Figures can be scaled by adding the width or height to the Markdown like this:
-
-```markdown
-![Caption for BioHackrXiv logo figure](./biohackrxiv.png){ width=50px }
-```
-
-# Other main section on your manuscript level 1
-
-Lists can be added with:
-
-1. Item 1
-2. Item 2
-
-# Citation Typing Ontology annotation
-
-You can use [CiTO](http://purl.org/spar/cito/2018-02-12) annotations, as explained in [this BioHackathon Europe 2021 write up](https://raw.githubusercontent.com/biohackrxiv/bhxiv-metadata/main/doc/elixir_biohackathon2021/paper.md) and [this CiTO Pilot](https://www.biomedcentral.com/collections/cito).
-Using this template, you can cite an article and indicate _why_ you cite that article, for instance DisGeNET-RDF [@citesAsAuthority:Queralt2016].
-
-The syntax in Markdown is as follows: a single intention annotation looks like
-`[@usesMethodIn:Krewinkel2017]`; two or more intentions are separated
-with colons, like `[@extends:discusses:Nielsen2017Scholia]`. When you cite two
-different articles, you use this syntax: `[@citesAsDataSource:Ammar2022ETL; @citesAsDataSource:Arend2022BioHackEU22]`.
-
-Possible CiTO typing annotation include:
-
-* citesAsDataSource: when you point the reader to a source of data which may explain a claim
-* usesDataFrom: when you reuse somehow (and elaborate on) the data in the cited entity
-* usesMethodIn
-* citesAsAuthority
-* citesAsEvidence
-* citesAsPotentialSolution
-* citesAsRecommendedReading
-* citesAsRelated
-* citesAsSourceDocument
-* citesForInformation
-* confirms
-* documents
-* providesDataFor
-* obtainsSupportFrom
-* discusses
-* extends
-* agreesWith
-* disagreesWith
-* updates
-* citation: generic citation
-
-
-# Results
-
-
-# Discussion
-
-...
-
-## Acknowledgements
-
-...
-
-## References
