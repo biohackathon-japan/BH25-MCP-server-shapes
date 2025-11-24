@@ -67,19 +67,18 @@ authors_short: Jose Labra \emph{et al.}
 
 # Introduction
 
-The Model Context Protocol (MCP) [@citesForInformation:mcp_anthropic] enhances usability by establishing an interface between Large Language Models and external utilities. By abstracting the complexity of data retrieval, MCP servers allow developers to expose specialized tools through a uniform schema.
-This decoupling enables models to interact directly with structured knowledge bases without custom integration logic,
-reducing the engineering overhead required to bridge probabilistic reasoning with deterministic tools.
+The Model Context Protocol (MCP) [@citesForInformation:mcp_anthropic] establishes an interface between Large Language Models (LLMs) and external utilities. 
+MCP servers allow developers to expose specialized tools through a uniform schema enhancing interoperability accross different systems transforming the integration from a many-to-many dependency graph to a uniform interface.
+It can increase the usability of LLMs which can interact directly with structured knowledge bases,
+reducing the overhead required to bridge probabilistic reasoning with deterministic tools.
+One possible application of MCP servers is to offer access to RDF data portals which expose SPARQL endpoints,
+offering a natural language interface which is complemented with a deterministic SPARQL-based query engine. 
+While RDF and SPARQL provide a highly expressive knowledge representation, the flexibility of their schema-agnostic approach can result in structural opacity, 
+hindering reliable automated consumption. Shape Expressions (ShEx) have been proposed as a formal schema language that can describe the required graph topology of an RDF data portal. 
 
-This paper contains a report on the project MCP server tools with RDF shapes that was developed during the [DBCLS BioHackathon 2025](https://2025.biohackathon.org/).
+In this paper, we present a report of the project that we developed as part of our participation in the [DBCLS BioHackathon 2025](https://2025.biohackathon.org/), which was focused on the exploration of using MCP servers with RDF data portals and Shape Expressions.
+During the project, we also identified other challenges like the comparison between different Shape Expressions that can be extracted from existing SPARQL endpoints or the analysis of the evolution of ontologies using their shapes.
 
-<!-- structure of introduction: 
-
-- Talk about MCP protocol and MCP servers
-- Talk about RDF data 
-- Talk about Shapes, ShEx and SHACL...and schemas for RDF data
-- Indicate what are the main goals...
--->
 
 
 ## RDF Portal MCP server (TogoMCP)
@@ -176,16 +175,20 @@ We confirmed that the use of ShEx significantly improved the results.
 
 # Day 5
 ## TogoMCP/MIE file
+
 We updated all the MIE files for TogoMCP to confirm the specification decided on the previous day. In particular, the MIE files for BacDive and MediaDive, the RDF-Config-generated ShEx and biological questions were also given to the LLM so that the resulting MIE files incorporated all the ShEx components and the LLM can answer the given questions. We found that creating the MIE files with ShEx and biological questions can take much longer time and some additional prompts, and the resulting MIE files had larger sizes. For example, BacDive's MIE file now has more than 2,000 lines, which may be a little too large than intended. This is partly because the MIE file contained all the given biological questions and corresponding SPARQL queries, in addition to the other SPARQL query examples required by the specification. We then tested the LLM with a few questions. Here are a few examples:
+
 - Composition of a medium: https://claude.ai/share/45982d86-1448-4e8d-8983-7d18610f00e7
 - CO2 containing media with inorganic compounds: https://claude.ai/share/f57ef84e-8d8d-4074-8acd-18cda078b224
 
 For the latter question, the Microbial KG group found two media that were previously unknown as containing CO2 and free of organic compounds.
 
 # Accomplishments and challenges identified
+
 - Extended TogoMCP to include Glycosmos, BacDive, and MediaDive.
 - We have discovered the importance of biologically relevant questions for better in-context learning of the LLM.
 - We have confirmed the power of biologically relevant subset of ShEx schemas for high-quality SPARQL generation.
 
 # Conclusions and future work
 
+By leveraging ShEx as a machine-readable contract, an MCP server can translate natural language requests from the LLM into syntactically and semantically validated SPARQL queries, transforming a black-box data source into an introspectable, usable tool for agentic systems.
