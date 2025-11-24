@@ -67,6 +67,10 @@ authors_short: Jose Labra \emph{et al.}
 
 # Introduction
 
+The Model Context Protocol (MCP) [@citesForInformation:mcp_anthropic] enhances usability by establishing an interface between Large Language Models and external utilities. By abstracting the complexity of data retrieval, MCP servers allow developers to expose specialized tools through a uniform schema.
+This decoupling enables models to interact directly with structured knowledge bases without custom integration logic,
+reducing the engineering overhead required to bridge probabilistic reasoning with deterministic tools.
+
 This paper contains a report on the project MCP server tools with RDF shapes that was developed during the [DBCLS BioHackathon 2025](https://2025.biohackathon.org/).
 
 <!-- structure of introduction: 
