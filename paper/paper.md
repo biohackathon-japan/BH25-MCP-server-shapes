@@ -332,7 +332,3 @@ We are planning to continue working on this line and to explore how we can evalu
 # Acknowledgments
 
 We want to acknowledge the organizers of the Biohackathon 2025 for supporting our participation in Mie, Japan. The event generates a unique atmosphere for collaboration between international and local researchers which generate fruitful discussions and projects. Members of the WESO team were partially funded by project SEK-25-GRU-GIC-24-089. 
-
-# Author Contribution
-
-workflow creation, JELG, YY, AK; validation, JELG, YY, AK; critical comments, JMA, YO, SK, JK, DFA and SBL; writing, AK, JELG, YY; implementation: AK, YY, JELG, SBL

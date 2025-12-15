@@ -79,3 +79,9 @@ figures, tables, and annotate citations with the Citation Typing Ontology.
 This repository can be converted into a preview PDF with BioHackrXiv [Preview Server](http://preview.biohackrxiv.org/).
 The preview website asks for the link to your repository and will automatically find the `paper.md` and create an PDF.
 
+# Author Contributions
+
+workflow creation, JELG, YY, AK; validation, JELG, YY, AK; critical comments, JMA, YO, SK, JK, DFA and SBL; writing, AK, JELG, YY; implementation: AK, YY, JELG, SBL
+
+# References
+
