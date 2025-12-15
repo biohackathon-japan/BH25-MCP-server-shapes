@@ -12,11 +12,11 @@ authors:
   - name: Jose Emilio Labra Gayo
     orcid: 0000-0001-8907-5348
     affiliation: 1
-    role: Writing, Implementation, Leading
+    role: Writing, Implementation
   - name: Yasunori Yamamoto
     orcid: 0000-0002-6943-6887
     affiliation: 2
-    role: Writing, Implementation, Leading
+    role: Writing, Implementation
   - name: Akira R. Kinjo
     orcid: 0000-0002-4006-8208
     affiliation: 5
@@ -24,15 +24,15 @@ authors:
   - name: Andra Waagmeester
     orcid: 0000-0001-9773-4008
     affiliation: 3
-    role: Reviewing, Critical Comments
+    role: Reviewing
   - name: Javier Millán Acosta
     orcid: 0000-0002-4166-7093
     affiliation: 4
-    role: Critical Comments
+    role: Reviewing
   - name: Shuichi Kawashima
     orcid: 0000-0001-7883-3756
     affiliation: 2
-    role: Critical comments
+    role: Use case
   - name: Yoko Okabeppu
     affiliation: 6
     role: Use case
@@ -43,11 +43,11 @@ authors:
   - name: Samuel Bustamante-Larriet
     orcid: 0009-0005-8631-2682
     affiliation: 1
-    role: Implementation, Reviewing
+    role: Implementation
   - name: Daniel Fernández-Álvarez
     orcid: 0000-0002-8666-7660
     affiliation: 1
-    role: Implementation, Reviewing
+    role: Implementation
 affiliations:
   - name: University of Oviedo, Spain
     index: 1
