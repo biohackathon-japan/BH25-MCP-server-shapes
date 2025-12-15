@@ -1,4 +1,3 @@
-![MCP_Server](https://hackmd.io/_uploads/ryqJSpWWbl.png)
 ---
 title: 'DBCLS BioHackathon 2025 report: MCP server tools with RDF shapes'
 title_short: 'BioHackJP25: MCP servers with shapes'
@@ -332,4 +331,4 @@ We are planning to continue working on this line and to explore how we can evalu
 
 # Acknowledgments
 
-We want to acknowledge the organizers of the Biohackathon 2025 for supporting our participation in Mie, Japan. The event generates a unique atmosphere for collaboration between international and local researchers which generate fruitful discussions and projects. 
+We want to acknowledge the organizers of the Biohackathon 2025 for supporting our participation in Mie, Japan. The event generates a unique atmosphere for collaboration between international and local researchers which generate fruitful discussions and projects.
