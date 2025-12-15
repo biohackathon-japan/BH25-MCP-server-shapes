@@ -65,7 +65,7 @@ git_url: https://github.com/biohackathon-japan/BH25-MCP-server-shapes
 authors_short: Jose Labra \emph{et al.}
 ---
 
-# Introduction
+## Introduction
 
 The Model Context Protocol (MCP) [@citesForInformation:mcp_anthropic] establishes an interface between Large Language Models (LLMs) and external utilities. 
 MCP servers allow developers to expose specialized tools through a uniform schema enhancing interoperability accross different systems transforming the integration from a many-to-many dependency graph to a uniform interface.
@@ -91,15 +91,15 @@ The MIE file for a database contains the metadata, a biologically relevant subse
 
 In the following sections, we provide a description of the activities that were developed before the Biohackatho as well as the actitivies that were done during participation the Biohackathon and also some activities that we carried on after the biohackathon and that we are planning to work in the future. 
 
-# Report of activities
+## Report of activities
 
-## Before the biohackathon
+### Before the biohackathon
 
 Before the biohackathon, we had some offline interaction to identify a common project that we were interested to work on. We considered that it would be interesting to leverage LLMs to increase the usability of RDF portals and that maybe the use of MCP servers could offer some interesting possibilities. In that sense, we did some initial work on implementing an MCP server for RDF portal which was available in this github repository: https://github.com/arkinjo/RDFPortal-MCP and we also created an initial version of an MCP server for rudof: https://github.com/rudof-project/rudof. In this way, we could have some initial setup for collaboration during the Biohackathon.
 
-## Day 1
+### Day 1
 
-### Architecture and MIE files
+#### Architecture and MIE files
 
 During the first and second day of the biohackathon we had some discussions where we could identify the main architecture and possible pipeline for the tools which is presented in the following figure.
 
@@ -122,7 +122,7 @@ An initial MIE file template was developed here: https://github.com/arkinjo/RDFP
 That MIE template was ad hoc, and could be inconsistent, and/or may contain too little or too much information. 
 As another example, the UniProt MIE file was: https://github.com/arkinjo/RDFPortal-MCP/blob/main/mie/uniprot.yaml and there are other MIE files in [this folder](https://github.com/arkinjo/RDFPortal-MCP/tree/main/mie)
 
-### TogoMCP
+#### TogoMCP
 
 We added Glycosmos, along with a configuration file that would later become a MIE file, to TogoMCP.
 Unlike other databases, the Glycosmos interface uses its original SPARQL endpoint (https://ts.glycosmos.org/sparql) rather than the one provided by the RDF Portal so it has access to the latest version of Glycosmos. The process of creating the Glycosmos MIE file is provided at https://claude.ai/share/6ed633b7-24c6-4843-98c9-eb4506c5c156. The resulting MIE file is uploaded to the GitHub: https://github.com/arkinjo/RDFPortal-MCP/blob/BH25/mie/glycosmos.yaml. We tested Glycosmos with a few biological questions:
@@ -132,13 +132,13 @@ Unlike other databases, the Glycosmos interface uses its original SPARQL endpoin
 
 Members from another working group (Glycosmos MCP server) confirmed that the results were reasonable.
 
-### Schema comparison
+#### Schema comparison
 
 A related project that appeared during the biohackathon and we considerec quite interesting is the possibility to compare ShEx schemas that intend to represent the same class of entities in different RDF data portals. To that end, we started a prototype implementation of a ShEx comparator tool in collaboration with a related project from Javier Millán Acosta.
 
 One aspect to take into account is the differences in prefix declarations from one SPARQL endpoint to another. For example, the following table compares the [different prefix declarations](https://docs.google.com/spreadsheets/d/1ciddrqV1CNnNdCBkLt-By_aROMCBJrGd7IEj3rNnojE/edit?gid=630722908#gid=630722908). 
 
-### Next steps identified in day 1
+#### Next steps identified in day 1
 
 The main obstacle to using ShEx and VoID (and RDF-config) as prompts to the LLM is that they are often too big (i.e., consume too many tokens).
 The MIE file is designed to provide a more concise and compact representation of the essential information of ShEx and VoID, with a particular focus on constructing correct and effective SPARQL queries. We identified the following steps to continue working during the Biohackathon:
@@ -149,9 +149,9 @@ The MIE file is designed to provide a more concise and compact representation of
 - Unify and obtain a simplified version and generate MIE files. We added [a module](https://github.com/rudof-project/rudof/tree/master/mie) for MIE in rudof.
 - We considered that we could start by selecting a use case to compare ShEx schemas and continue working on it in collaboration with Javier Millán Acosta.
 
-## Day 2
+### Day 2
 
-### TogoMCP/MIE file
+#### TogoMCP/MIE file
 
 One of the crucial ingredients of the MIE file is the ShEx-like schema, which contains a biologically relevant subset of the ShEx (shape expressions). Currently, this subset is more or less randomly determined by the LLM during its exploration of the RDF graphs. As a results, it is highly possible that important classes and properties are missing in the resulting MIE file, which in turn deteriorates the quality of LLM-generated answers to biological queries. To avoid this problem, we considered the use of RDF-Config. RDF-Config can generate a SheX schema from a set of hand-crafted RDF-config (YAML) files. As such, we can explicitly specify a biologically relevant subset of the ShEx schema. We may use this feature of RDF-Config to craft a better prompt for creating the MIE file. However, making the RDF-config files can be a tedious task. Thus, we tried to use an LLM to help this process by creating a prompt for the LLM that contains a template of the RDF-Config YAML files. 
 
@@ -161,18 +161,18 @@ One of the crucial ingredients of the MIE file is the ShEx-like schema, which co
 The resulting RDF-confing file looks promising. However, we found that the LLM sometimes gave outputs that deviated from the specification of the RDF-Config file.
 Further experimentation is necessary to produce strictly well-formed RDF-Config files.
 
-### MIE data model in Rust
+#### MIE data model in Rust
 
 We created a [MIE data model](https://github.com/rudof-project/rudof/blob/master/mie/src/mie.rs) in Rust for rudof, so we could have a first implementation to generate MIE files from ShEx.
 
-## Day 3
+### Day 3
 
-### TogoMCP/MIE file
+#### TogoMCP/MIE file
 
 Upon the request from the Microbial Knowledge Bases group, we integrated [BacDive](https://bacdive.dsmz.de/) and [MediaDive](https://mediadive.dsmz.de/) into TogoMCP. 
 As they had manually curated RDF-Config files, we could also have used the biologically relevant subsets of the ShEx schemas of these databases, but this was not done at this time (it was eventually done on Day 5). In addition, they prepared a list of biological questions:
 
-#### BacDive Questions
+##### BacDive Questions
 - Show me the type strain of Belnapia moabensis.
 - Which strains belong to the order Rhizobiales?
 - Does strain DSM 16746 form spores?
@@ -195,7 +195,7 @@ As they had manually curated RDF-Config files, we could also have used the biolo
 - Regarding enzyme activity, which strains have alcohol dehydrogenase activity and grow at high temperature?
 - Which strains can utilize both, glucose and nitrate?We used these questions to create the MIE files. That is, we instructed the LLM to explore the RDF graph structure deeply enough to be able to answer these questions. 
 
-#### MediaDive Questions
+##### MediaDive Questions
 - What is the composition of DSMZ Medium 119?
 - Which ingredients are used in MRS Medium?
 - Does Medium 119 contain KH2PO4?
@@ -204,7 +204,7 @@ As they had manually curated RDF-Config files, we could also have used the biolo
 - Which medium ingredients are frequently optional?
 - What is the pH and temperature for cultivating strains from Lactobacillus in MRS Medium?
 
-#### Combined BacDive and MediaDive Questions
+##### Combined BacDive and MediaDive Questions
 - Which strains are known to produce lactic acid and grow in MRS Medium?
 - List strains that can be cultivated in Medium 1 and are motile.
 - Which pathogenic strains can be grown using glucose as a carbon source?
@@ -215,11 +215,11 @@ We can include these questions in the prompts to create the MIE files so that th
 
 The Microbial KB group examined these results and confirmed that they were reasonable, although not perfect.
 
-### Schema comparison
+#### Schema comparison
 
 We realized that the service descriptions developed by uniprot and DBCLS describe the data in opposite ways, in uniprot, they present the data by class while in DBCLS they present the data by property. 
 
-The service descriptions employed in DBCLS can be obtained running the following SPARQL CONSTRUCT query on the SPARQL endpoint: https://plod.dbcls.jp/sparql
+The service descriptions employed in DBCLS can be obtained running the following SPARQL CONSTRUCT query on the SPARQL endpoint: `https://plod.dbcls.jp/sparql`
 
 ```sparql
 PREFIX void: <http://rdfs.org/ns/void#>
@@ -257,11 +257,11 @@ CONSTRUCT WHERE {
 }
 ```
 
-## Day 4 
+### Day 4 
 
-### TogoMCP/MIE file
+#### TogoMCP/MIE file
 
-#### The MIE file specification
+##### The MIE file specification
 
 We discussed on the specification of the MIE file and agreed that the main contents should include the following items:
 - schema_info (Metadata on the RDF graphs)
@@ -272,7 +272,7 @@ We discussed on the specification of the MIE file and agreed that the main conte
 - cross-reference SPARQL examples (cross-references are particularly important for connecting databases, so we prepare an independent section.)
 - data_statistics (statistics useful for optimizing SPARQL queries)
 
-#### Feeding the raw ShEx into the LLM
+##### Feeding the raw ShEx into the LLM
 
 BacDive and MediaDive come with the ShEx files generated from manually curated RDF-Config files. We attempted to feed the ShEx files directly into the LLM to see the significance of this information. Here are the results of example queries with or without ShEx:
 - With ShEx: https://claude.ai/share/9f270856-ab09-4147-a970-e176742f1e06
@@ -280,7 +280,7 @@ BacDive and MediaDive come with the ShEx files generated from manually curated R
 
 We confirmed that the use of ShEx significantly improved the results.
 
-### rudof extensions
+#### rudof extensions
 
 Some of the work related to rudof during this day was:
 
@@ -288,9 +288,9 @@ Some of the work related to rudof during this day was:
 - We created a first version of a ShEx comparator tool in rudof. 
 - We added a Jupyter Colab section that explains how it is possible to use rudof to compare schemas: https://rudof-project.github.io/tutorials/compare.html 
 
-## Day 5
+### Day 5
 
-### TogoMCP/MIE file
+#### TogoMCP/MIE file
 
 We updated all the MIE files for TogoMCP to confirm the specification decided on the previous day. In particular, the MIE files for BacDive and MediaDive, the RDF-Config-generated ShEx and biological questions were also given to the LLM so that the resulting MIE files incorporated all the ShEx components and the LLM can answer the given questions. We found that creating the MIE files with ShEx and biological questions can take much longer time and some additional prompts, and the resulting MIE files had larger sizes. For example, BacDive's MIE file now has more than 2,000 lines, which may be a little too large than intended. This is partly because the MIE file contained all the given biological questions and corresponding SPARQL queries, in addition to the other SPARQL query examples required by the specification. We then tested the LLM with a few questions. Here are a few examples:
 
@@ -299,13 +299,13 @@ We updated all the MIE files for TogoMCP to confirm the specification decided on
 
 For the latter question, the Microbial KG group found two media that were previously unknown as containing CO2 and free of organic compounds.
 
-### Rudof extensions
+#### Rudof extensions
 
 We implemented the first prototype of rudof that gets information from service descriptions and generates a MIE file template. We used it to generate an example MIE file for UniProt and created a Jupyter Colab book that showcases it here: https://rudof-project.github.io/tutorials/service_description.html. When we tried it with RDFPortal, we noticed that the information generated in Turtle in RDFPortal is minimal. One possibility we explored is to use SPARQL CONSTRUCT queries. As rudof also supports SPARQL queries, we may have a way to obtain richer information from RDFPortal. We added a section in the Jupyter book explaining that process. 
 The conversion from service descriptions to MIE was very basic, only the name of the SPARQL endpoint. During those days, we went from release versions of [0.1.93](https://github.com/rudof-project/rudof/releases/tag/v0.1.93) to [0.1.102](https://github.com/rudof-project/rudof/releases/tag/v0.1.102).
 
 
-## After the Biohackathon
+### After the Biohackathon
 
 After the biohackathon we continued with some activities:
 
@@ -313,7 +313,7 @@ After the biohackathon we continued with some activities:
 - We continued the implementation of more tools and features for the rudof MCP server. It currently supports doing SPARQL queries, obtaining information from nodes in RDF graphs as well as ShEx and SHACL validation.
 
 
-# Accomplishments and challenges identified
+## Accomplishments and challenges identified
 
 The main accomplishments that we consider are:
 
@@ -324,17 +324,17 @@ The main accomplishments that we consider are:
 
 One of the challenges that we have identified during the Biohackathon is to create an evaluation pipeline that can be used to check the increase in usability of an LLM-based interface with MCP server support. For that, we are planning to identify some key competency questions and to setup some experiment that can be used for this evaluation.
 
-# Conclusions
+## Conclusions
 
 We consider that the combination of MCP Servers and LLMs with RDF Data portals and SPARQL endpoints can increase the usability of existing systems without precluding the accuracy of the answers. In order to do that, leveraging on Shape Expressions as a machine-readable contract, an MCP server can translate natural language requests from the LLM into syntactically and semantically validated SPARQL queries, transforming a black-box data source into an introspectable, usable tool for agentic systems.
 We are planning to continue working on this line and to explore how we can evaluate the benefits of this approach in future work. 
 
-# Acknowledgments
+## Acknowledgments
 
 We want to acknowledge the organizers of the Biohackathon 2025 for supporting our participation in Mie, Japan. The event generates a unique atmosphere for collaboration between international and local researchers which generate fruitful discussions and projects. Members of the WESO team were partially funded by project SEK-25-GRU-GIC-24-089. 
 
-# Author Contributions
+## Author Contributions
 
 workflow creation, JELG, YY, AK; validation, JELG, YY, AK; critical comments, JMA, YO, SK, JK, DFA and SBL; writing, AK, JELG, YY; implementation: AK, YY, JELG, SBL
 
-# References
+## References
