@@ -1,3 +1,4 @@
+![MCP_Server](https://hackmd.io/_uploads/ryqJSpWWbl.png)
 ---
 title: 'DBCLS BioHackathon 2025 report: MCP server tools with RDF shapes'
 title_short: 'BioHackJP25: MCP servers with shapes'
@@ -34,7 +35,7 @@ authors:
     affilation: 3
   - name: Samuel Bustamante-Larriet
     orcid: 0009-0005-8631-2682
-    affiliation: 1    
+    affiliation: 1 
   - name: Daniel Fernández-Álvarez
     orcid: 0000-0002-8666-7660
     affiliation: 1
@@ -71,7 +72,7 @@ The Model Context Protocol (MCP) [@citesForInformation:mcp_anthropic] establishe
 MCP servers allow developers to expose specialized tools through a uniform schema enhancing interoperability accross different systems transforming the integration from a many-to-many dependency graph to a uniform interface.
 It can increase the usability of LLMs which can interact directly with structured knowledge bases,
 reducing the overhead required to bridge probabilistic reasoning with deterministic tools.
-One possible application of MCP servers is to offer access to RDF data portals which expose SPARQL endpoints, like the RDF Portal developed by the Database Center for Life Sciences in Japan: https://rdfportal.org/.
+One possible application of MCP servers is to offer access to RDF data portals which expose SPARQL endpoints, like the RDF Portal developed by the Database Center for Life Science in Japan: https://rdfportal.org/.
 MCP Servers can offer a natural language interface which is complemented with a deterministic SPARQL-based query engine. 
 While RDF and SPARQL provide a highly expressive knowledge representation, the flexibility of their schema-agnostic approach can result in structural opacity, 
 hindering reliable automated consumption.
@@ -87,7 +88,7 @@ During the project, we identified three main contributions:
 - MIE specification. To make SPARQL generation more accurate and effective, TogoMCP utilizes a special file, called a MIE file, for each database. 
 The MIE file for a database contains the metadata, a biologically relevant subset of ShEx and VoID schemas, as well as examples of RDF subgraphs and SPARQL queries, all concisely annotated in natural language (English). When a user provides a prompt that requires SPARQL queries, the LLM will (usually) calls an MCP tool named **describe_rdf_schema** with the database name as the argument, which presents the MIE file to the LLM. The MIE files are semi-automatically generated using the LLM and a hand-crafted template MIE file. An MCP prompt with a database name argument is also a part of TogoMCP. When BH25 started, there was no specification for the MIE file. The structure of the MIE template was ad hoc, and we didn't know which parts of the MIE file was critical. Thus, the objectives of working team included finding out the features essential for accurate and effective SPARQL generations and explicitly specifying them in the template file.
 
-- `rudof` MCP Server and other extensions: Motivated by our work during the biohackathon, we implemented an MCP server wrapper for rudof functionality. Although it is currently under development, it already supports some relavant features like validation and SPARQL querying, as well as basic support for MIE format and `rdf_config` files. During the biohackathon, we also identified some interesting extensions for rudof, like the possibility to compare ShEx schemas to chech the real differences between various incarnations of similar data in different RDF data portals as well as the evolution of ontologies.
+- `rudof` MCP Server and other extensions: Motivated by our work during the biohackathon, we implemented an MCP server wrapper for rudof functionality. Although it is currently under development, it already supports some relavant features like validation and SPARQL querying, as well as basic support for MIE format and `rdf_config` files. During the biohackathon, we also identified some interesting extensions for rudof, like the possibility to compare ShEx schemas to check the real differences between various incarnations of similar data in different RDF data portals as well as the evolution of ontologies.
 
 In the following sections, we provide a description of the activities that were developed before the Biohackatho as well as the actitivies that were done during participation the Biohackathon and also some activities that we carried on after the biohackathon and that we are planning to work in the future. 
 
@@ -127,8 +128,8 @@ As another example, the UniProt MIE file was: https://github.com/arkinjo/RDFPort
 We added Glycosmos, along with a configuration file that would later become a MIE file, to TogoMCP.
 Unlike other databases, the Glycosmos interface uses its original SPARQL endpoint (https://ts.glycosmos.org/sparql) rather than the one provided by the RDF Portal so it has access to the latest version of Glycosmos. The process of creating the Glycosmos MIE file is provided at https://claude.ai/share/6ed633b7-24c6-4843-98c9-eb4506c5c156. The resulting MIE file is uploaded to the GitHub: https://github.com/arkinjo/RDFPortal-MCP/blob/BH25/mie/glycosmos.yaml. We tested Glycosmos with a few biological questions:
 
-- Glycan Biosynthesis Pathway Evolution: https://claude.ai/share/3dfcd4d2-205a-493d-9a6a-e9edf3df6860
-- Glycosylation-Related Genes in Cancer: https://claude.ai/share/4a9b2cdc-edc4-429c-9b8e-29681e747247
+- [Glycan Biosynthesis Pathway Evolution](https://claude.ai/share/3dfcd4d2-205a-493d-9a6a-e9edf3df6860)
+- [Glycosylation-Related Genes in Cancer](https://claude.ai/share/4a9b2cdc-edc4-429c-9b8e-29681e747247)
 
 Members from another working group (Glycosmos MCP server) confirmed that the results were reasonable.
 
