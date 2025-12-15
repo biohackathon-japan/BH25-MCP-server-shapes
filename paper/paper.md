@@ -1,6 +1,6 @@
 ---
-title: 'DBCLS BioHackathon 2025 report: MCP server tools with RDF shapes'
-title_short: 'BioHackJP25: MCP servers with shapes'
+title: 'MCP server tools with RDF shapes'
+title_short: 'BioHackJP25: MCP servers with RDF shapes'
 tags:
   - Semantic web
   - Ontologies
@@ -12,32 +12,42 @@ authors:
   - name: Jose Emilio Labra Gayo
     orcid: 0000-0001-8907-5348
     affiliation: 1
+    role: Writing, Implementation, Leading
   - name: Yasunori Yamamoto
     orcid: 0000-0002-6943-6887
     affiliation: 2
+    role: Writing, Implementation, Leading
   - name: Akira R. Kinjo
     orcid: 0000-0002-4006-8208
     affiliation: 5
+    role: Writing, Implementation
   - name: Andra Waagmeester
     orcid: 0000-0001-9773-4008
     affiliation: 3
+    role: Reviewing, Critical Comments
   - name: Javier Millán Acosta
     orcid: 0000-0002-4166-7093
     affiliation: 4
+    role: Critical Comments
   - name: Shuichi Kawashima
     orcid: 0000-0001-7883-3756
     affiliation: 2
+    role: Critical comments
   - name: Yoko Okabeppu
     affiliation: 6
+    role: Use case
   - name: Julia Koblitz
     orcid: 0000-0002-7260-2129
     affilation: 3
+    role: Use case
   - name: Samuel Bustamante-Larriet
     orcid: 0009-0005-8631-2682
-    affiliation: 1 
+    affiliation: 1
+    role: Implementation, Reviewing
   - name: Daniel Fernández-Álvarez
     orcid: 0000-0002-8666-7660
     affiliation: 1
+    role: Implementation, Reviewing
 affiliations:
   - name: University of Oviedo, Spain
     index: 1
@@ -64,10 +74,14 @@ git_url: https://github.com/biohackathon-japan/BH25-MCP-server-shapes
 # bottom of the generated paper (typically the first two authors):
 authors_short: Jose Labra \emph{et al.}
 ---
+## Abstract
+
+In this paper, we present the work we have done during the Japan Biohackathon 2025 about implementing MCP servers supported by RDF data shapes 
+to improve natural language interactions with large RDF datasets using SPARQL.
 
 ## Introduction
 
-The Model Context Protocol (MCP) [@citesForInformation:mcp_anthropic] establishes an interface between Large Language Models (LLMs) and external utilities. 
+The Model Context Protocol (MCP) [@citesForInformation:mcp_anthropic] establishes an interface between Large Language Models (LLMs) and external utilities.
 MCP servers allow developers to expose specialized tools through a uniform schema enhancing interoperability accross different systems transforming the integration from a many-to-many dependency graph to a uniform interface.
 It can increase the usability of LLMs which can interact directly with structured knowledge bases,
 reducing the overhead required to bridge probabilistic reasoning with deterministic tools.
